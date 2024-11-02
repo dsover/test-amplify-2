@@ -1,10 +1,11 @@
 "use client";
+import {Button} from "@nextui-org/button";
 
 import { signOut } from "next-auth/react";
 
 const SignOutButton = () => {
   return (
-    <button onClick={() => signOut()}>sign out</button>
+    <Button onClick={() => signOut()}>sign out</Button>
   );
 };
 

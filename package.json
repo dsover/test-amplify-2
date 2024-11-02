@@ -10,7 +10,9 @@
   },
   "dependencies": {
     "@aws-sdk/client-cognito-identity-provider": "^3.679.0",
+    "@nextui-org/react": "^2.4.8",
     "aws-amplify": "^6.8.0",
+    "framer-motion": "^11.11.11",
     "next": "14.2.16",
     "next-auth": "^4.24.8",
     "react": "^18",
