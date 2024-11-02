@@ -204,6 +204,12 @@ export default function LoginPage() {
         setInitiateForgotPassword(true);
     };
 
+    const handleKeyDown = (event: React.KeyboardEvent) => {
+        if (event.key === "Enter") {
+            handleLogin();
+        }
+    };
+
     return (
         <div className="max-w-lg mx-auto p-6 bg-white shadow-md rounded-lg">
             <Suspense fallback={<div>Loading...</div>}>
@@ -222,6 +228,7 @@ export default function LoginPage() {
                             }
                             value={newPasswordInput}
                             disabled={isLoggingIn}
+                            onKeyDown={handleKeyDown}
                         />
                     </>
                 ) : initiateForgotPassword ? (
@@ -233,6 +240,7 @@ export default function LoginPage() {
                             onChange={(e) => setUsername(e.currentTarget.value)}
                             value={username}
                             disabled={isLoggingIn}
+                            onKeyDown={handleKeyDown}
                         />
                     </>
                 ) : resetCodeRequired ? (
@@ -252,6 +260,7 @@ export default function LoginPage() {
                             }
                             value={resetCodeInput}
                             disabled={isLoggingIn}
+                            onKeyDown={handleKeyDown}
                         />
                         <Input
                             placeholder="New Password"
@@ -259,6 +268,7 @@ export default function LoginPage() {
                             onChange={(e) => setPassword(e.currentTarget.value)}
                             value={password}
                             disabled={isLoggingIn}
+                            onKeyDown={handleKeyDown}
                         />
                     </>
                 ) : (
@@ -270,14 +280,16 @@ export default function LoginPage() {
                             onChange={(e) => setUsername(e.currentTarget.value)}
                             value={username}
                             disabled={isLoggingIn}
+                            onKeyDown={handleKeyDown}
                         />
-                        
+
                         <Input
                             placeholder="Password"
                             type="password"
                             onChange={(e) => setPassword(e.currentTarget.value)}
                             value={password}
                             disabled={isLoggingIn}
+                            onKeyDown={handleKeyDown}
                         />
                     </>
                 )}
@@ -288,6 +300,12 @@ export default function LoginPage() {
                     onClick={handleLogin}
                     style={{
                         border: "rgb(0, 0, 0, 0.2) solid 1px",
+                    }}
+                    onKeyDown={(event) => {
+                        if (event.key === "Enter" || event.key === " ") {
+                            event.preventDefault(); // Prevent scrolling on space
+                            handleLogin();
+                        }
                     }}
                 >
                     <text>
@@ -305,7 +323,16 @@ export default function LoginPage() {
                 {newPasswordRequired ||
                 initiateForgotPassword ||
                 resetCodeRequired ? null : (
-                    <Button onClick={handleForgotPwdClick} color="secondary">
+                    <Button
+                        onClick={handleForgotPwdClick}
+                        color="secondary"
+                        onKeyDown={(event) => {
+                            if (event.key === "Enter" || event.key === " ") {
+                                event.preventDefault(); // Prevent scrolling on space
+                                handleForgotPwdClick();
+                            }
+                        }}
+                    >
                         Forgot Password
                     </Button>
                     // <a onClick={handleForgotPwdClick}>
